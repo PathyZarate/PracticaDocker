@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: dbtienda
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - backend
+
+  tienda:
+    build:
+      context: .
+    container_name: tienda
+    ports:
+      - "8001:8080"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=TiendaDB;User Id=sa;Password=Your_password123;Encrypt=false;TrustServerCertificate=true;
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

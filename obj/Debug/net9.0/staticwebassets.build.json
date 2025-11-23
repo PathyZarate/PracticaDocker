@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "DeEYiSqNC9wEjXF60ZBTevHCHh4yaxc2hdvdvUo3Pjg=",
+  "Source": "tienda",
+  "BasePath": "_content/tienda",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
