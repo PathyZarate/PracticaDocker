@@ -1,4 +1,3 @@
-// Program.cs
 using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using tienda.Data;
@@ -8,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TiendaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ✅ Configuración para manejar ciclos en JSON
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -20,10 +18,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Esperar 10 segundos para que SQL Server esté listo
 Thread.Sleep(10000);
 
-// Crear la base de datos
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<TiendaContext>();
