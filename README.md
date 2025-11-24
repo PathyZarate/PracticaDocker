@@ -7,7 +7,7 @@ dotnet add package Microsoft.AspNetCore.Mvc -v 8.0.0
 dotnet add package Microsoft.AspNetCore.OpenApi -v 8.0.0
 
 Con el comando: dotnet list package veremos que los tengamos instalados
-En caso de tener los paquetes en otra version se deben ejecutar los comandos:
+En caso de tener los paquetes en otra version se deben cambiar las versiones en el archivo tienda.csproj y luego ejecutar los comandos:
 dotnet clean
 dotnet restore
 dotnet build
