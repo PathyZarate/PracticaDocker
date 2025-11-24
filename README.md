@@ -19,6 +19,7 @@ docker compose up
 Una vez esto levantado debemos ir a postman y poner el siguiente link para listar:
 http://localhost:8001/api/Producto/Listar
 http://localhost:8001/api/Serie/Listar
+Aqui se debe tomar en cuenta que en mi codigo program.cs yo introduje una linea de espera de 10 segundos para el sql por lo que se debe volver al intentar en ese tiempo si no da el link al primer intento.
 Y para agregar datos debemos poner:
 http://localhost:8001/api/Producto
 http://localhost:8001/api/Serie
