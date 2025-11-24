@@ -16,19 +16,16 @@ namespace tienda.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuración de la relación: Producto → Serie (1 a muchos)
             modelBuilder.Entity<Serie>()
                 .HasOne(s => s.Producto)
                 .WithMany(p => p.Series)
                 .HasForeignKey(s => s.ProductoId)
-                .OnDelete(DeleteBehavior.Cascade); // Opcional: si eliminas producto, se eliminan sus series
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Opcional: configurar tipo decimal
             modelBuilder.Entity<Producto>()
                 .Property(p => p.Precio)
                 .HasColumnType("decimal(18,2)");
 
-            // Opcional: Índice único en NroSerie si no debe repetirse
             modelBuilder.Entity<Serie>()
                 .HasIndex(s => s.NroSerie)
                 .IsUnique();
