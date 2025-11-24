@@ -16,7 +16,6 @@ namespace tienda.Controllers
             _context = context;
         }
 
-        // GET: api/Serie/Listar
         [HttpGet("Listar")]
         public async Task<ActionResult<IEnumerable<Serie>>> GetSeries()
         {
@@ -26,7 +25,6 @@ namespace tienda.Controllers
             return Ok(series);
         }
 
-        // GET: api/Serie/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Serie>> GetSerieById(int id)
         {
@@ -40,11 +38,10 @@ namespace tienda.Controllers
             return Ok(serie);
         }
 
-        // POST: api/Serie
         [HttpPost]
         public async Task<ActionResult<Serie>> PostSerie(Serie serie)
         {
-            // Validar que el ProductoId existe
+
             var productoExiste = await _context.Productos.AnyAsync(p => p.Id == serie.ProductoId);
             if (!productoExiste)
                 return BadRequest($"No existe un producto con ID {serie.ProductoId}.");
