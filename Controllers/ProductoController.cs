@@ -16,17 +16,15 @@ namespace tienda.Controllers
             _context = context;
         }
 
-        // GET: api/Producto/Listar
         [HttpGet("Listar")]
         public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
         {
             var productos = await _context.Productos
-                .Include(p => p.Series) // Carga las series relacionadas (opcional, pero útil)
+                .Include(p => p.Series)
                 .ToListAsync();
             return Ok(productos);
         }
 
-        // GET: api/Producto/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Producto>> GetProductoById(int id)
         {
@@ -42,11 +40,10 @@ namespace tienda.Controllers
             return Ok(producto);
         }
 
-        // POST: api/Producto
         [HttpPost]
         public async Task<ActionResult<Producto>> PostProducto(Producto producto)
         {
-            // Validación básica (opcional, pero recomendada)
+
             if (string.IsNullOrWhiteSpace(producto.Modelo) || string.IsNullOrWhiteSpace(producto.Tipo))
             {
                 return BadRequest("Modelo y Tipo son obligatorios.");
@@ -55,11 +52,9 @@ namespace tienda.Controllers
             _context.Productos.Add(producto);
             await _context.SaveChangesAsync();
 
-            // Devuelve 201 Created con Location header
             return CreatedAtAction(nameof(GetProductoById), new { id = producto.Id }, producto);
         }
 
-        // POST: api/Producto/ConSeries
         [HttpPost("ConSeries")]
         public async Task<ActionResult<Producto>> PostProductoConSeries([FromBody] ProductoConSeriesDto dto)
         {
@@ -81,12 +76,11 @@ namespace tienda.Controllers
         }
     }
 
-    // DTO para crear producto + series en una sola llamada
     public class ProductoConSeriesDto
     {
         public string? Modelo { get; set; }
         public string? Tipo { get; set; }
         public decimal Precio { get; set; }
-        public List<string>? NrosSerie { get; set; } // Ej: ["SN001", "SN002", "SN003"]
+        public List<string>? NrosSerie { get; set; }
     }
 }
